@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 //const Tab = createMaterialBottomTabNavigator();
 
-const HomeStack = ({route, navigation}) => (
+const HomeStack = ({navigation}) => (
   <Stack.Navigator>
     <Stack.Screen
       component={HomeScreen}
@@ -36,7 +36,7 @@ const HomeStack = ({route, navigation}) => (
   </Stack.Navigator>
 );
 
-const DetailsStack = ({route, navigation}) => (
+const DetailsStack = () => (
   <Stack.Navigator headerMode="none">
     <Stack.Screen component={DetailsScreen} name={'Details'} />
   </Stack.Navigator>
@@ -46,7 +46,7 @@ const CostumTabBarButton = ({children, onPress}) => (
   <TouchableOpacity
     onPress={onPress}
     style={{
-      top: -30,
+      top: -10,
       justifyContent: 'center',
       alignItems: 'center',
       ...styles.shadow,
@@ -77,7 +77,7 @@ export default function BottomTab() {
           elevation: 10,
           backgroundColor: '#fff',
           borderRadius: 15,
-          height: 90,
+          height: 60,
           ...styles.shadow,
         },
         showLabel: false,

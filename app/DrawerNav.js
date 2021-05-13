@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {
   Avatar,
   Title,
@@ -11,11 +12,6 @@ import {
   TouchableRipple,
   Switch,
 } from 'react-native-paper';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItem,
-} from '@react-navigation/drawer';
 
 const DrawerNav = props => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
