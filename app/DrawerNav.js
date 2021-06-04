@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {DrawerContentScrollView} from '@react-navigation/drawer';
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {
   Avatar,
   Title,
@@ -13,8 +13,12 @@ import {
   Switch,
 } from 'react-native-paper';
 
+import {AuthContext} from '../components/Context';
+
 const DrawerNav = props => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  const {signOut} = useContext(AuthContext);
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
@@ -54,7 +58,7 @@ const DrawerNav = props => {
             </View>
           </View>
           <Drawer.Section>
-            <Drawer.Item
+            <DrawerItem
               icon={({color, size}) => (
                 <Icon name="home-outline" color={color} size={size} />
               )}
@@ -63,7 +67,7 @@ const DrawerNav = props => {
                 props.navigation.navigate('Home');
               }}
             />
-            <Drawer.Item
+            <DrawerItem
               icon={({color, size}) => (
                 <Icon name="account-outline" color={color} size={size} />
               )}
@@ -72,7 +76,7 @@ const DrawerNav = props => {
                 props.navigation.navigate('Profile');
               }}
             />
-            <Drawer.Item
+            <DrawerItem
               icon={({color, size}) => (
                 <Icon name="bookmark-outline" color={color} size={size} />
               )}
@@ -81,7 +85,7 @@ const DrawerNav = props => {
                 props.navigation.navigate('BookmarksStack');
               }}
             />
-            <Drawer.Item
+            <DrawerItem
               icon={({color, size}) => (
                 <Icon name="account-outline" color={color} size={size} />
               )}
@@ -107,12 +111,12 @@ const DrawerNav = props => {
         </View>
       </DrawerContentScrollView>
       <Drawer.Section>
-        <Drawer.Item
+        <DrawerItem
           icon={({color, size}) => (
             <Icon name="exit-to-app" color={color} size={size} />
           )}
           label="Sign out"
-          onPress={() => {}}
+          onPress={() => signOut()}
         />
       </Drawer.Section>
     </View>

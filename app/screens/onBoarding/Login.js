@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -12,19 +12,23 @@ import {
   TextInput,
 } from 'react-native';
 
+import {AuthContext} from '../../../components/Context';
+
 const Login = ({navigation}) => {
   const [data, setData] = useState({
-    email: '',
+    username: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
   });
 
+  const {signIn} = useContext(AuthContext);
+
   const textInputChange = val => {
     if (val.length !== 0) {
-      setData({...data, email: val, check_textInputChange: true});
+      setData({...data, username: val, check_textInputChange: true});
     } else {
-      setData({...data, email: val, check_textInputChange: false});
+      setData({...data, username: val, check_textInputChange: false});
     }
   };
 
@@ -36,6 +40,10 @@ const Login = ({navigation}) => {
     setData({...data, secureTextEntry: !data.secureTextEntry});
   };
 
+  const loginHandle = (username, password) => {
+    signIn(username, password);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#000" barStyle="light-content" />
@@ -43,11 +51,11 @@ const Login = ({navigation}) => {
         <Text style={styles.text_header}>Welcome</Text>
       </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <Text style={styles.text_footer}>Email</Text>
+        <Text style={styles.text_footer}>Username</Text>
         <View style={styles.action}>
           <Icon name="team" size={20} />
           <TextInput
-            placeholder="Your Email"
+            placeholder="Your username"
             style={styles.textInput}
             autoCapitalize={'none'}
             onChangeText={val => textInputChange(val)}
@@ -62,7 +70,7 @@ const Login = ({navigation}) => {
           <Icon name="lock" size={20} />
           <TextInput
             secureTextEntry={data.secureTextEntry ? true : false}
-            placeholder="Your Email"
+            placeholder="Your password"
             style={styles.textInput}
             autoCapitalize={'none'}
             onChangeText={val => handlePasswordChange(val)}
@@ -75,13 +83,19 @@ const Login = ({navigation}) => {
           />
         </View>
         <View style={styles.button}>
-          <LinearGradient
+          <TouchableOpacity
             style={styles.signIn}
-            start={{x: 0, y: 0}}
-            end={{x: 1, y: 0}}
-            colors={['#000', '#3F3D56']}>
-            <Text style={[styles.textSign, {color: '#fff'}]}>Sign in</Text>
-          </LinearGradient>
+            onPress={() => {
+              loginHandle(data.username, data.password);
+            }}>
+            <LinearGradient
+              style={styles.signIn}
+              start={{x: 0, y: 0}}
+              end={{x: 1, y: 0}}
+              colors={['#000', '#3F3D56']}>
+              <Text style={[styles.textSign, {color: '#fff'}]}>Sign in</Text>
+            </LinearGradient>
+          </TouchableOpacity>
           <TouchableOpacity
             style={[
               styles.signIn,
