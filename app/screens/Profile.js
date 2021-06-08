@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import {StripeProvider, useStripe} from '@stripe/stripe-react-native';
+//import {StripeProvider, useStripe} from '@stripe/stripe-react-native';
 import {StyleSheet, Text, View, Button, Alert} from 'react-native';
 
 const Profile = () => {
-  const {initPaymentSheet, presentPaymentSheet} = useStripe();
+  //const {initPaymentSheet, presentPaymentSheet} = useStripe();
   const [loading, setLoading] = useState(false);
-  const [clientSecret, setClientSecret] = useState('');
+  //const [clientSecret, setClientSecret] = useState('');
 
   const fetchPaymentSheetParams = async () => {
     const response = await axios.post(
@@ -30,11 +30,11 @@ const Profile = () => {
   };
 
   const initializePaymentSheet = async () => {
-    const {
+    /* const {
       paymentIntent,
       ephemeralKey,
       customer,
-    } = await fetchPaymentSheetParams();
+    } = await fetchPaymentSheetParams(); */
 
     const {error} = await initPaymentSheet({
       customerId: customer,
@@ -57,7 +57,7 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    initializePaymentSheet();
+    //initializePaymentSheet();
   }, []);
 
   return (
@@ -67,7 +67,7 @@ const Profile = () => {
           variant="primary"
           disabled={!loading}
           title="Checkout"
-          onPress={openPaymentSheet}
+          //onPress={openPaymentSheet}
         />
       </View>
     </StripeProvider>

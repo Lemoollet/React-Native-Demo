@@ -1,17 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {StyleSheet, Text, View, TextInput, Alert, Button} from 'react-native';
-import {StripeProvider, useStripe} from '@stripe/stripe-react-native';
+//import {StripeProvider, useStripe} from '@stripe/stripe-react-native';
 
 const Searchbar = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
-  const [clientSec, setClientSec] = useState();
+  //const [clientSec, setClientSec] = useState();
 
-  const {initPaymentSheet, presentPaymentSheet, confirmPayment} = useStripe();
+  //const {initPaymentSheet, presentPaymentSheet, confirmPayment} = useStripe();
 
   useEffect(() => {
-    fetchPaymentIntentClientSecret();
+    //fetchPaymentIntentClientSecret();
   }, []);
 
   const fetchPaymentIntentClientSecret = async () => {
@@ -69,7 +69,10 @@ const Searchbar = () => {
           placeholder="E-mail"
           onChange={value => setEmail(value.nativeEvent.text)}
         />
-        <Button variant="primary" title="Checkout" onPress={handlePayPress} />
+        <Button
+          variant="primary"
+          title="Checkout" /* onPress={handlePayPress}  */
+        />
       </View>
     </StripeProvider>
   );
